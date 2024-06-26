@@ -14,7 +14,7 @@ const endboard = document.querySelector(".End-board");
 let gameOver = false;
 let foodX, foodY;
 let snakeBody = [];
-let snakeX = 5, snakeY = 10;
+let snakeX = 2, snakeY = 2;
 let velocityX = 0, velocityY = 0;
 let setIntervalId;
 let score = 0;
@@ -41,6 +41,7 @@ const ChangePosition = () => {
 const GamOverTime = () => {
   clearInterval(setIntervalId);
   location.reload();
+  
 }
 
 //gameover alert 
@@ -48,7 +49,8 @@ const GamOverTime = () => {
 const handleGameOver = () => {
   playboard.style.display = 'none';
   endboard.style.display = 'block';
-  setInterval(GamOverTime, 3000);
+  setTimeout(GamOverTime, 3000);
+  
 }
 
 
@@ -81,6 +83,7 @@ const initGame = () => {
   
   if (gameOver) return handleGameOver();
   
+  
   let htmlmarkup = `<div class="food" style="grid-area: ${foodY} / ${foodX} "></div>`;
   
   for (var i = snakeBody.length - 1; i > 0 ; i--) {
@@ -93,18 +96,13 @@ const initGame = () => {
   
   // changing food position after snake eats
   
-  if (snakeX == foodX && snakeY == foodY ) {
+  if ( snakeX === foodX && snakeY === foodY ) {
     ChangePosition();
     snakeBody.push([foodX, foodY]);
     score++;
     
    scoreElement.innerHTML = `score: ${score}`;
    highScore = score >= highScore ? score: highScore;
-   
-   localStorage.setItem("highScore", highScore);
-   highScoreElement.innerHTML = `highScore : ${highScore}`;
-   
-   highScoreElement.innerHTML = highScore + localStorage.getItem(valueOf.highScoreElement)
    
   }
   
