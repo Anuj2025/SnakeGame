@@ -2,6 +2,14 @@ const playboard = document.querySelector(".play-board");
 const scoreElement = document.querySelector(".Score");
 const highScoreElement = document.querySelector(".high-Score");
 const controls = document.querySelectorAll(".controls i");
+const loader = document.querySelector(".loader");
+const main = document.querySelector("main");
+
+const endboard = document.querySelector(".End-board");
+
+
+
+
 
 let gameOver = false;
 let foodX, foodY;
@@ -12,8 +20,15 @@ let setIntervalId;
 let score = 0;
 let highScore = localStorage.getItem("high-Score") || 0;
 highScoreElement.innerHTML = `highScore : ${highScore}`;
+//loader 
 
 
+window.addEventListener('load', () => {
+  setInterval(() => {
+    loader.style.display = 'none';
+    main.style.display = 'block';
+  }, 1000);
+});
 
 // randomization the food 
 
@@ -22,13 +37,21 @@ const ChangePosition = () => {
   foodY = Math.floor(Math.random() * 30) + 1;
 }
 
-//gameover alert 
-
-const handleGameOver = () => {
-  alert("GameOver click ok To Restart Again");
+// Game Over Time Limit
+const GamOverTime = () => {
   clearInterval(setIntervalId);
   location.reload();
 }
+
+//gameover alert 
+
+const handleGameOver = () => {
+  playboard.style.display = 'none';
+  endboard.style.display = 'block';
+  setInterval(GamOverTime, 3000);
+}
+
+
 
 // change the direction of snake with keys
 const ChangeDirectiom = (e) => {
@@ -39,8 +62,8 @@ const ChangeDirectiom = (e) => {
     velocityX = 0;
     velocityY = 1;
   } else if (e.key === 'ArrowLeft') {
-    velocityX = 0;
-    velocityY = -1;
+    velocityX = -1;
+    velocityY = 0;
   } else if (e.key === 'ArrowRight') {
     velocityX = 1;
     velocityY = 0;
@@ -70,7 +93,7 @@ const initGame = () => {
   
   // changing food position after snake eats
   
-  if (snakeX === foodX && snakeY === foodY ) {
+  if (snakeX == foodX && snakeY == foodY ) {
     ChangePosition();
     snakeBody.push([foodX, foodY]);
     score++;
@@ -80,6 +103,8 @@ const initGame = () => {
    
    localStorage.setItem("highScore", highScore);
    highScoreElement.innerHTML = `highScore : ${highScore}`;
+   
+   highScoreElement.innerHTML = highScore + localStorage.getItem(valueOf.highScoreElement)
    
   }
   
