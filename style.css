@@ -1,0 +1,71 @@
+
+
+*{ 
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+font-family: 'Open Sans', sans-serif;
+
+}
+body{
+  display: flex;
+  align-items: center;
+  min-height: 100vh;
+  justify-content: center;
+  background: #E3F2F3;
+  
+}
+
+.wapper{
+  width: 65vmin;
+  height: 70vmin;
+  background: #293447;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 5px;
+}
+
+.game-details{
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 500;
+  display: flex;
+  padding: 20px 27px;
+  justify-content: space-between;
+}
+.play-board{
+  width: 100%;
+  height: 100%;
+  background: #212837;
+  display: grid;
+  grid-template: repeat(30, 1fr) / repeat(30, 1fr);
+}
+
+
+.play-board .food{
+  background: red;
+}
+
+
+.play-board .snake{
+  background: deepskyblue;
+}
+
+
+.controls{
+  display: flex;
+  justify-content: center;
+}
+
+.controls i{
+padding: 25px 0;
+color: white;
+text-align: center;
+font-size: 1.3rem;
+width: calc(100% / 4);
+  
+}
+i.hover{
+  background: #10141B;
+}
